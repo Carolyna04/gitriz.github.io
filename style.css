@@ -1,0 +1,427 @@
+body{
+margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    
+    /* Configuração do body como um contentor flexível */
+    display: flex;
+    justify-content: center; /* Centra os 3 painéis na página */
+    align-items: flex-start; /* Alinha os painéis pelo topo */
+    gap: 30px; /* Espaço entre os painéis */
+    padding-top: 50px; /* Espaço do topo da página */
+    box-sizing: border-box; /* Garante que o padding não cause problemas */
+    background-color: #87CEFA;
+  
+  .title {
+  height: 78%;
+  left: -100;
+	color: #D8BFD8;
+}
+  p{ 
+    font-size: 30px;
+  }
+}
+
+#instructions{
+  width: 50%;
+  max-width: 300px;
+  max-height: 50vh;
+  margin: auto;
+  border: none;
+  border-radius: 8px;
+  background: pink ;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+
+  *{
+    color: #00ffaa;
+    
+  } 
+  
+  h2{
+    font-size: 30px;
+  }
+  
+  img{
+    margin-bottom: 15px;
+  }
+  
+  &::backdrop{
+    background-image: "https://uploads.onecompiler.io/43s2gw4h7/43ua7jrzw/images.jfif" ;
+    backdrop-filter:blur(5px);
+  }
+}
+/* --- 1. Reset Básico e Configuração do 'body' (3 colunas) --- */
+
+
+
+/* --- 2. O Tabuleiro de Jogo (Painel Central) --- */
+
+.AreaJ {
+    width: 300px;  /* 12 quadrados * 25px */
+    height: 500px; /* 20 quadrados * 25px */
+    border: 1px solid #000000;  
+    border-radius: 8px; 
+    
+    /* A cor de fundo dos "quadradinhos" vazios */
+    background-color: #e0e0e0; 
+
+    /* Define o tamanho de cada quadrado da grelha de fundo */
+    background-size: 25px 25px;
+
+    /* Desenha a grelha de fundo (linhas horizontais e verticais) */
+    background-image: 
+        /* Linhas Horizontais */
+        linear-gradient(to bottom, 
+            #cccccc 1px,  /* Cor e espessura da linha */
+            transparent 1px /* O resto fica transparente */
+        ),
+        /* Linhas Verticais */
+        linear-gradient(to right, 
+            #cccccc 1px,
+            transparent 1px
+        );
+        
+    /* O 'pai' de referência para as peças (position: absolute) */
+    position: relative;
+}
+
+/* --- 3. Painéis Laterais (Esquerdo e Direito) --- */
+
+.painel-esquerdo,
+.painel-lateral {
+    width: 150px;
+    padding: 20px;
+    border: 1px solid #000000;  
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* --- 4. Estilos dos Placares (Comuns aos dois painéis) --- */
+
+/* Títulos (Recorde, Tempo, Ataques) */
+.painel-esquerdo h2,
+.painel-lateral h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+/* Título "Próxima" (é um h3, estilo ligeiramente diferente) */
+.titulo-proxima {
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+}
+
+/* Remove o espaço do topo do primeiro título de cada painel */
+.painel-esquerdo h2:first-of-type,
+.painel-lateral h2:first-of-type {
+    margin-top: 0;
+}
+
+/* Números (Pontos, Recorde, Tempo) */
+.placar-valor {
+    font-size: 38px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 5px;
+}
+
+/* Nome do Recorde (Painel Esquerdo) */
+.placar-nome {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d9534f; /* Vermelho */
+    margin-top: 5px;
+    height: 25px;
+    overflow: hidden;
+}
+
+/* --- 5. Estilos Específicos dos Painéis --- */
+
+/* Controlo de Volume (Painel Esquerdo) */
+.controlo-volume {
+    margin-top: 25px;
+}
+
+.controlo-volume label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #337ab7;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #337ab7;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Placar Próxima Peça (Painel Direito) */
+#proxima-peca-container {
+    width: 100px;  /* 4 * 25px */
+    height: 100px; /* 4 * 25px */
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 15px auto 0 auto; 
+    
+    /* Para centrar a peça lá dentro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Força a peça "Próxima" a não ser 'absolute' */
+#proxima-peca-container .peca {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+}
+
+/* Botões de Controlo (Painel Direito) */
+.controlos-jogo {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-jogo {
+    padding: 12px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #337ab7; /* Azul */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-jogo:hover {
+    background-color: #286090;
+}
+
+.btn-jogo:disabled {
+    background-color: #999999;
+    cursor: not-allowed;
+}
+
+/* Cor especial para o botão "Continuar" (quando pausado) */
+#pause-button.pausado {
+     background-color: #f0ad4e; /* Laranja */
+}
+#pause-button.pausado:hover {
+     background-color: #ec971f;
+}
+
+
+/* --- 6. Estilos das Peças (Ativas e Estáticas) --- */
+
+/* A "peça" (o contentor 4x4, 3x3, etc.) */
+.peca {
+    position: absolute; /* Posicionada em relação ao .retangulo-retrato */
+    display: grid;
+}
+
+/* O "quadradinho" individual (dentro da peça ativa) */
+.quadradinho {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-sizing: border-box; 
+}
+
+/* O "quadradinho" (depois que aterra) */
+.quadradinho-estatico {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-sizing: border-box; 
+    position: absolute; /* Posicionado em relação ao .retangulo-retrato */
+}
+
+
+/* --- 7. Cores das Peças --- */
+
+/* Cores para os quadradinhos DENTRO de uma peça ativa */
+.peca.tipo-I .quadradinho { background-color: #00FFFF; } /* Ciano */
+.peca.tipo-O .quadradinho { background-color: #FFFF00; } /* Amarelo */
+.peca.tipo-T .quadradinho { background-color: #800080; } /* Roxo */
+.peca.tipo-S .quadradinho { background-color: #00FF00; } /* Verde */
+.peca.tipo-L .quadradinho { background-color: #FFA500; } /* Laranja */
+.peca.tipo-J .quadradinho { background-color: #0000FF; } /* Azul */
+
+/* Cores para os quadradinhos ESTÁTICOS (aterrados) */
+.quadradinho-estatico.tipo-I { background-color: #00FFFF; }
+.quadradinho-estatico.tipo-O { background-color: #FFFF00; }
+.quadradinho-estatico.tipo-T { background-color: #800080; }
+.quadradinho-estatico.tipo-S { background-color: #00FF00; }
+.quadradinho-estatico.tipo-L { background-color: #FFA500; }
+.quadradinho-estatico.tipo-J { background-color: #0000FF; }
+
+
+.controlo-volume {
+    margin-top: 25px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.controlo-volume label {
+    font-size: 16px;
+    color: #333;
+    display: block; /* Faz o 'label' ficar em cima do slider */
+    margin-bottom: 10px;
+}
+
+/* Estiliza o slider */
+#volume-slider {
+    -webkit-appearance: none; /* Remove o estilo padrão do Chrome/Safari */
+    appearance: none;
+    width: 100%; /* Ocupa 100% da largura do painel */
+    height: 8px;
+    background: #ccc; /* Cor da "pista" */
+    border-radius: 5px;
+    outline: none; /* Remove a borda azul ao clicar */
+}
+
+/* Estiliza o "polegar" (a bolinha que se arrasta) */
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #337ab7; /* O mesmo azul dos nossos botões */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #337ab7;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.oculto {
+    display: none !important; /* 'important' garante que se sobrepõe */
+}
+
+/* O fundo escurecido */
+#modal-overlay {
+    position: fixed; /* Cobre a tela inteira */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Preto com 70% de transparência */
+    z-index: 1000; /* Fica em cima de tudo, exceto o modal */
+    display: block; /* 'display' é usado para mostrar/esconder */
+}
+
+/* O contentor do pop-up */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* O truque para centrar perfeitamente */
+    transform: translate(-50%, -50%); 
+    
+    background-color: #f0f0f0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 1001; /* Fica em cima do fundo escurecido */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display: block;
+}
+
+.modal h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.modal p {
+    font-size: 18px;
+    color: #333;
+}
+
+.modal span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Estilos do formulário de recorde */
+.form-recorde {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-recorde label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-recorde input[type="text"] {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Reutiliza o estilo do botão de jogo */
+.modal .btn-jogo {
+    margin-top: 10px;
+}
+/* (NOVO) Estilo da imagem do Easter Egg */
+#easter-egg-image {
+    width: 100%; /* Faz a imagem ocupar o espaço do modal */
+    max-height: 300px; /* Limita a altura */
+    object-fit: contain; /* Garante que a imagem caiba sem distorcer */
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+
+
