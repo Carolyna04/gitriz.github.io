@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Frefriz </title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    
+  </head>
+  <body>
+  
+      <h1 class="title">bem vindo ao jetriz! </h1>
+      <p id="currentTime"></p>
+      <dialog id="instructions">
+        <h2> Titulo do pop-up </h2>
+        <img src= 'https://uploads.onecompiler.io/43s2gw4h7/43ua7jrzw/images.jfif'
+     <P> use as setas ⬅ e ⮕ para mover e as tecla ⬆ para rodar <P>
+        <button id="close"> Close </button>
+      </dialog>
+      
+      
+ <audio id="game-music" src="tema.mp3" loop preload="auto"></audio>
+
+    <div class="painel-esquerdo">
+        
+        <h2>Recorde</h2>
+        <div id="recorde-nome" class="placar-nome">---</div>
+        <div id="recorde-valor" class="placar-valor">0</div>
+
+        <h2>Tempo</h2>
+        <div id="cronometro-valor" class="placar-valor">00:00</div>
+    
+        <div class="controlo-volume">
+            <label for="volume-slider">Volume</label>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+    
+    </div>
+
+    <div class="AreaJ">
+        </div>
+
+    <div class="painel-lateral">
+
+        <h2 class="titulo-placar">Pontos</h2>
+        <div id="ataques-valor" class="placar-valor">0</div>
+
+        <h3 class="titulo-proxima">Próxima</h3>
+        <div id="proxima-peca-container"></div>
+
+        <div class="controlos-jogo">
+            <button id="start-button" class="btn-jogo">Iniciar Jogo</button>
+            <button id="pause-button" class="btn-jogo" disabled>Pausar</button>
+        </div>
+
+    </div>
+
+    <div id="modal-overlay" class="oculto"></div>
+
+    <div id="game-over-modal" class="modal oculto">
+        <h2>Fim de Jogo!</h2>
+        <p>Sua pontuação: <span id="final-score-gameover">0</span></p>
+        <button id="close-gameover-button" class="btn-jogo">OK</button>
+    </div>
+
+    <div id="recorde-modal" class="modal oculto">
+        <h2>Novo Recorde!</h2>
+        <p>Sua pontuação: <span id="final-score-recorde">0</span></p>
+        <div class="form-recorde">
+            <label for="player-name">Seu nome:</label>
+            <input type="text" id="player-name" maxlength="10" placeholder="Jogador">
+            <button id="save-score-button" class="btn-jogo">Salvar</button>
+        </div>
+    </div>
+
+    <div id="easter-egg-modal" class="modal oculto">
+        <h2>buaaaa</h2>
+        <img id="easter-egg-image" src="https://br.pinterest.com/pin/751397519058814809/" alt="Easter Egg">
+        <button id="close-easter-egg-button" class="btn-jogo">Fechar</button>
+    </div>
+     <div class="title"></div>
+       
+       
+  </body>
+</html>
+
+    
+    
+    
+    
+    
